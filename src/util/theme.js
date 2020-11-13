@@ -20,7 +20,9 @@ export default {
       textAlign: 'center'
     },
     image: {
-      margin: '20px auto 20px auto'
+      margin: '20px auto 20px auto',
+      width: '80px',
+      height: '80px'
     },
     pageTitle: {
       margin: '10px auto 10px auto'

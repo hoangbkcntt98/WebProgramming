@@ -41,7 +41,7 @@ class signup extends Component {
       handle: this.state.handle
     };
     axios
-      .post('/signup', userData)
+      .post('https://europe-west1-project-management-4a011.cloudfunctions.net/api/signup', userData)
       .then((res) => {
         console.log(res.data);
         localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
