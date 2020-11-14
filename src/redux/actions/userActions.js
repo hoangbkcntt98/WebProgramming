@@ -63,6 +63,16 @@ import {
       .catch((err) => console.log(err));
   };
   
+  export const uploadImage = (formData) => (dispatch) => {
+    dispatch({ type: LOADING_USER });
+    axios
+      .post('https://europe-west1-project-management-4a011.cloudfunctions.net/api/user/image', formData)
+      .then(() => {
+        dispatch(getUserData());
+      })
+      .catch((err) => console.log(err));
+  };
+  
   const setAuthorizationHeader = (token) => {
     const FBIdToken = `Bearer ${token}`;
     localStorage.setItem('FBIdToken', FBIdToken);
