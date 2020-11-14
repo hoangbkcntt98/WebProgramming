@@ -3,7 +3,8 @@ import {
     SET_ERRORS,
     CLEAR_ERRORS,
     LOADING_UI,
-    SET_UNAUTHENTICATED
+    SET_UNAUTHENTICATED,
+    LOADING_USER
   } from '../types';
   import axios from 'axios';
   
@@ -28,7 +29,7 @@ import {
   export const signupUser = (newUserData, history) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios
-      .post('/signup', newUserData)
+      .post('https://europe-west1-project-management-4a011.cloudfunctions.net/api/signup', newUserData)
       .then((res) => {
         setAuthorizationHeader(res.data.token);
         dispatch(getUserData());
@@ -50,6 +51,7 @@ import {
   };
   
   export const getUserData = () => (dispatch) => {
+    dispatch({ type: LOADING_USER });
     axios
       .get('https://europe-west1-project-management-4a011.cloudfunctions.net/api/user')
       .then((res) => {
