@@ -172,8 +172,6 @@ exports.getAuthenticatedUser = (req, res) => {
       return db
         .collection("notifications")
         .where("recipient", "==", req.user.handle)
-        .orderBy("createdAt", "desc")
-        .limit(10)
         .get();
     })
     .then((data) => {
