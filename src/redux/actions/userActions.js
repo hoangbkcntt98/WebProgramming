@@ -4,7 +4,7 @@ import axios from 'axios';
 export const loginUser = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post('/login', userData)
+    .post('https://europe-west1-project-management-4a011.cloudfunctions.net/api/login', userData)
     .then((res) => {
       const FBIdToken = `Bearer ${res.data.token}`;
       localStorage.setItem('FBIdToken', FBIdToken);
@@ -23,7 +23,7 @@ export const loginUser = (userData, history) => (dispatch) => {
 
 export const getUserData = () => (dispatch) => {
   axios
-    .get('/user')
+    .get('https://europe-west1-project-management-4a011.cloudfunctions.net/api/user')
     .then((res) => {
       dispatch({
         type: SET_USER,
