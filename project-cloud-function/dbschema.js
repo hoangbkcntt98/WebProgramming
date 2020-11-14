@@ -18,6 +18,13 @@ let db = {
       createdAt: '2019-03-15T10:59:52.798Z',
       likeCount: 5,
       commentCount: 3
+    },
+    {
+      userHandle: 'user',
+      body: 'Co ve troi sap mua',
+      createdAt: '2020-03-15T10:59:52.798Z',
+      likeCount: 15,
+      commentCount: 6
     }
   ],
   comments: [
