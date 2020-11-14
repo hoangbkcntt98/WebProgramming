@@ -2,7 +2,8 @@ import {
     SET_SCREAMS,
     LOADING_DATA,
     LIKE_SCREAM,
-    UNLIKE_SCREAM
+    UNLIKE_SCREAM,
+    DELETE_SCREAM
   } from '../types';
   import axios from 'axios';
   
@@ -49,3 +50,10 @@ import {
       })
       .catch((err) => console.log(err));
   };
+  export const deleteScream = (screamId) => (dispatch) =>{
+    axios.delete(`https://europe-west1-project-management-4a011.cloudfunctions.net/api/scream/${screamId}`)
+    .then(()=>{
+      dispatch({type:DELETE_SCREAM,payload: screamId})
+    })
+    .catch(err => console.log(err))
+  }
