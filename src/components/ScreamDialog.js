@@ -14,9 +14,10 @@ import Typography from '@material-ui/core/Typography';
 //Icons 
 import CloseIcon from '@material-ui/icons/Close';
 import UnfoldMore from '@material-ui/icons/UnfoldMore';
-// Redux Stuff
+import ChatIcon from '@material-ui/icons/Chat';
 import { connect} from 'react-redux';
 import { getScream } from '../redux/actions/dataActions';
+import LikeButton  from './LikeButton';
 
 const styles = (theme) => ({
     ...theme,
@@ -96,6 +97,12 @@ class ScreamDialog extends Component{
                         <Typography variant = "body1">
                             {body}
                         </Typography>
+                        <LikeButton screamId = {screamId} />
+                        <span>{likeCount} Likes</span>
+                        <MyButton tip="comments">
+                            <ChatIcon color="primary" />
+                        </MyButton>
+                        <span>{commentCount} comments</span>
                 </Grid>
             </Grid>
         )
