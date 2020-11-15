@@ -14,7 +14,11 @@ import { deleteScream} from '../redux/actions/dataActions';
 import { DialogActions } from '@material-ui/core';
 
 const styles = {
-
+    deleteButton:{
+        position: 'absolute',
+        left:'90%',
+        top:'10%'
+    }
 }
 class DeleteScream extends Component{
     state = {

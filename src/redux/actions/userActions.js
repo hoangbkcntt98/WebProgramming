@@ -76,7 +76,7 @@ export const uploadImage = (formData) => (dispatch) => {
 export const editUserDetails = (userDetails) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post('/user', userDetails)
+    .post(`https://europe-west1-project-management-4a011.cloudfunctions.net/api/user`, userDetails)
     .then(() => {
       dispatch(getUserData());
     })

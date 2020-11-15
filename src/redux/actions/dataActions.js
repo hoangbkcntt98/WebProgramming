@@ -3,7 +3,11 @@ import {
     LOADING_DATA,
     LIKE_SCREAM,
     UNLIKE_SCREAM,
-    DELETE_SCREAM
+    DELETE_SCREAM,
+    POST_SCREAM,
+    SET_ERRORS,
+    CLEAR_ERRORS,
+    LOADING_UI
   } from '../types';
   import axios from 'axios';
   
@@ -50,10 +54,32 @@ import {
       })
       .catch((err) => console.log(err));
   };
-  export const deleteScream = (screamId) => (dispatch) =>{
-    axios.delete(`https://europe-west1-project-management-4a011.cloudfunctions.net/api/scream/${screamId}`)
-    .then(()=>{
-      dispatch({type:DELETE_SCREAM,payload: screamId})
+  //delete a Scream
+  export const deleteScream = (screamId) => (dispatch) => {
+    axios
+      .delete(`https://europe-west1-project-management-4a011.cloudfunctions.net/api/scream/${screamId}`)
+      .then(() => {
+        dispatch({ type: DELETE_SCREAM, payload: screamId });
+        console.log(screamId);
+      })
+      .catch((err) => console.log(err));
+  };
+  // Post a scream
+export const postScream = (newScream) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .post('https://europe-west1-project-management-4a011.cloudfunctions.net/api/scream/', newScream)
+    .then((res) => {
+      dispatch({
+        type: POST_SCREAM,
+        payload: res.data
+      });
+      dispatch({type:CLEAR_ERRORS});
     })
-    .catch(err => console.log(err))
-  }
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    });
+  };
