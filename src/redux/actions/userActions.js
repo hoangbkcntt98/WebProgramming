@@ -12,7 +12,7 @@ import axios from 'axios';
 export const loginUser = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post('https://europe-west1-project-management-4a011.cloudfunctions.net/api/login', userData)
+    .post('/login', userData)
     .then((res) => {
       setAuthorizationHeader(res.data.token);
       dispatch(getUserData());
@@ -30,7 +30,7 @@ export const loginUser = (userData, history) => (dispatch) => {
 export const signupUser = (newUserData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post('https://europe-west1-project-management-4a011.cloudfunctions.net/api/signup', newUserData)
+    .post('/signup', newUserData)
     .then((res) => {
       setAuthorizationHeader(res.data.token);
       dispatch(getUserData());
@@ -54,7 +54,7 @@ export const logoutUser = () => (dispatch) => {
 export const getUserData = () => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .get('https://europe-west1-project-management-4a011.cloudfunctions.net/api/user')
+    .get('/user')
     .then((res) => {
       dispatch({
         type: SET_USER,
@@ -67,7 +67,7 @@ export const getUserData = () => (dispatch) => {
 export const uploadImage = (formData) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post('https://europe-west1-project-management-4a011.cloudfunctions.net/api/user/image', formData)
+    .post('/user/image', formData)
     .then(() => {
       dispatch(getUserData());
     })
@@ -77,7 +77,7 @@ export const uploadImage = (formData) => (dispatch) => {
 export const editUserDetails = (userDetails) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post('https://europe-west1-project-management-4a011.cloudfunctions.net/api/user', userDetails)
+    .post('/user', userDetails)
     .then(() => {
       dispatch(getUserData());
     })
@@ -86,7 +86,7 @@ export const editUserDetails = (userDetails) => (dispatch) => {
 
 export const markNotificationsRead = (notificationIds) => (dispatch) => {
   axios
-    .post('https://europe-west1-project-management-4a011.cloudfunctions.net/api/notifications', notificationIds)
+    .post('/notifications', notificationIds)
     .then((res) => {
       dispatch({
         type: MARK_NOTIFICATIONS_READ

@@ -17,7 +17,7 @@ import {
   //Summit a comment
   export const submitComment = (screamId,commentData) => (dispatch) =>{
     dispatch({type: LOADING_UI});
-    axios.post(`https://europe-west1-project-management-4a011.cloudfunctions.net/api/scream/${screamId}/comment`,commentData)
+    axios.post(`/scream/${screamId}/comment`,commentData)
     .then( res => {
       dispatch({
         type: SUBMIT_COMMENT,
@@ -38,7 +38,7 @@ import {
   export const getScreams = () => (dispatch) => {
     dispatch({ type: LOADING_DATA });
     axios
-      .get('https://europe-west1-project-management-4a011.cloudfunctions.net/api/screams')
+      .get('/screams')
       .then((res) => {
         dispatch({
           type: SET_SCREAMS,
@@ -56,7 +56,7 @@ import {
   // Like a scream
   export const likeScream = (screamId) => (dispatch) => {
     axios
-      .get(`https://europe-west1-project-management-4a011.cloudfunctions.net/api/scream/${screamId}/like`)
+      .get(`/scream/${screamId}/like`)
       .then((res) => {
         dispatch({
           type: LIKE_SCREAM,
@@ -68,7 +68,7 @@ import {
   // Unlike a scream
   export const unlikeScream = (screamId) => (dispatch) => {
     axios
-      .get(`https://europe-west1-project-management-4a011.cloudfunctions.net/api/scream/${screamId}/unlike`)
+      .get(`/scream/${screamId}/unlike`)
       .then((res) => {
         dispatch({
           type: UNLIKE_SCREAM,
@@ -80,7 +80,7 @@ import {
   //delete a Scream
   export const deleteScream = (screamId) => (dispatch) => {
     axios
-      .delete(`https://europe-west1-project-management-4a011.cloudfunctions.net/api/scream/${screamId}`)
+      .delete(`/scream/${screamId}`)
       .then(() => {
         dispatch({ type: DELETE_SCREAM, payload: screamId });
         console.log(screamId);
@@ -91,7 +91,7 @@ import {
 export const postScream = (newScream) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post('https://europe-west1-project-management-4a011.cloudfunctions.net/api/scream/', newScream)
+    .post('/scream/', newScream)
     .then((res) => {
       dispatch({
         type: POST_SCREAM,
@@ -109,7 +109,7 @@ export const postScream = (newScream) => (dispatch) => {
   //get a scream
   export const getScream = (screamId) => (dispatch) => {
     dispatch({type: LOADING_UI});
-    axios.get(`https://europe-west1-project-management-4a011.cloudfunctions.net/api/scream/${screamId}`)
+    axios.get(`/scream/${screamId}`)
     .then((res) => {
       dispatch({
         type: SET_SCREAM,
@@ -123,7 +123,7 @@ export const postScream = (newScream) => (dispatch) => {
   export const getUserData = (userHandle) => (dispatch) => {
     dispatch({ type: LOADING_DATA });
     axios
-      .get(`https://europe-west1-project-management-4a011.cloudfunctions.net/api/user/${userHandle}`)
+      .get(`/user/${userHandle}`)
       .then((res) => {
         dispatch({
           type: SET_SCREAMS,
