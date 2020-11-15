@@ -21,12 +21,11 @@ class user extends Component {
 
     this.props.getUserData(handle);
     axios
-      .get(`https://europe-west1-project-management-4a011.cloudfunctions.net/api/user/${handle}`)
+      .get(`/user/${handle}`)
       .then((res) => {
         this.setState({
           profile: res.data.user
         });
-        console.log(this.profile);
       })
       .catch((err) => console.log(err));
   }
@@ -35,7 +34,7 @@ class user extends Component {
     const { screamIdParam } = this.state;
 
     const screamsMarkup = loading ? (
-      <p>Loading ---</p>
+      <p>Loading data...</p>
     ) : screams === null ? (
       <p>No screams from this user</p>
     ) : !screamIdParam ? (
@@ -54,8 +53,11 @@ class user extends Component {
           {screamsMarkup}
         </Grid>
         <Grid item sm={4} xs={12}>
-          {this.state.profile===null ?(<p>Loading</p>):(<StaticProfile profile={this.state.profile} />)}
-            
+          {this.state.profile === null ? (
+            <p>Loading profile...</p>
+          ) : (
+            <StaticProfile profile={this.state.profile} />
+          )}
         </Grid>
       </Grid>
     );

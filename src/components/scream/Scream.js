@@ -15,14 +15,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 // Icons
 import ChatIcon from '@material-ui/icons/Chat';
-
 // Redux
 import { connect } from 'react-redux';
 
-
 const styles = {
   card: {
-    position:'relative',
+    position: 'relative',
     display: 'flex',
     marginBottom: 20
   },
@@ -36,7 +34,6 @@ const styles = {
 };
 
 class Scream extends Component {
-  
   render() {
     dayjs.extend(relativeTime);
     const {
@@ -50,12 +47,16 @@ class Scream extends Component {
         likeCount,
         commentCount
       },
-      user: { authenticated ,credentials: {handle}}
+      user: {
+        authenticated,
+        credentials: { handle }
+      }
     } = this.props;
-    
-    const deleteButton = authenticated && userHandle === handle ? (
-      <DeleteScream screamId = {screamId} />
-    ):null
+
+    const deleteButton =
+      authenticated && userHandle === handle ? (
+        <DeleteScream screamId={screamId} />
+      ) : null;
     return (
       <Card className={classes.card}>
         <CardMedia
@@ -77,13 +78,17 @@ class Scream extends Component {
             {dayjs(createdAt).fromNow()}
           </Typography>
           <Typography variant="body1">{body}</Typography>
-          <LikeButton screamId = {screamId} />
+          <LikeButton screamId={screamId} />
           <span>{likeCount} Likes</span>
           <MyButton tip="comments">
             <ChatIcon color="primary" />
           </MyButton>
           <span>{commentCount} comments</span>
-          <ScreamDialog screamId = {screamId} userHandle = {userHandle}/>
+          <ScreamDialog
+            screamId={screamId}
+            userHandle={userHandle}
+            openDialog={this.props.openDialog}
+          />
         </CardContent>
       </Card>
     );
@@ -93,13 +98,12 @@ class Scream extends Component {
 Scream.propTypes = {
   user: PropTypes.object.isRequired,
   scream: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  openDialog: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
   user: state.user
 });
 
-export default connect(
-  mapStateToProps
-)(withStyles(styles)(Scream));
+export default connect(mapStateToProps)(withStyles(styles)(Scream));
