@@ -10,7 +10,7 @@ class home extends Component {
   };
   componentDidMount() {
     axios
-      .get('/screams')
+      .get('https://europe-west1-project-management-4a011.cloudfunctions.net/api/screams')
       .then((res) => {
         this.setState({
           screams: res.data
