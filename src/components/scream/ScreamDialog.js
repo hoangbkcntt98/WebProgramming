@@ -51,7 +51,7 @@ class ScreamDialog extends Component {
   state = {
     open: false,
     oldPath: '',
-    newPath: ''
+    newPath: '',
   };
   componentDidMount() {
     if (this.props.openDialog) {
@@ -69,14 +69,18 @@ class ScreamDialog extends Component {
     window.history.pushState(null, null, newPath);
 
     this.setState({ open: true, oldPath, newPath });
-    this.props.getScream(this.props.screamId);
+    this.props.getScream(this.props.screamId)
+    console.log(this.scream)
   };
   handleClose = () => {
     window.history.pushState(null, null, this.state.oldPath);
     this.setState({ open: false });
     this.props.clearErrors();
   };
-
+  handleUpdate = () =>{
+    // alert("hello")
+    this.handleOpen();    
+  }
   render() {
     const {
       classes,
@@ -92,7 +96,10 @@ class ScreamDialog extends Component {
       },
       UI: { loading }
     } = this.props;
-
+    let count = commentCount;
+    // let count = comments[0].length;
+    
+    // this.setState({count:commentCount})
     const dialogMarkup = loading ? (
       <div className={classes.spinnerDiv}>
         <CircularProgress size={200} thickness={2} />
@@ -125,7 +132,7 @@ class ScreamDialog extends Component {
           <span>{commentCount} comments</span>
         </Grid>
         <hr className={classes.visibleSeparator} />
-        <CommentForm screamId={screamId} />
+        <CommentForm screamId={screamId} handleUpdate={this.handleUpdate}/>
         <Comments comments={comments} />
       </Grid>
     );
@@ -166,7 +173,8 @@ ScreamDialog.propTypes = {
   screamId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
   scream: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired
+  UI: PropTypes.object.isRequired,
+  // comments: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({

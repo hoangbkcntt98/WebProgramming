@@ -16,7 +16,7 @@ import {
   
   //Summit a comment
   export const submitComment = (screamId,commentData) => (dispatch) =>{
-    dispatch({type: LOADING_UI});
+    // dispatch({type: LOADING_UI});
     axios.post(`/scream/${screamId}/comment`,commentData)
     .then( res => {
       dispatch({
@@ -24,7 +24,7 @@ import {
         payload: res.data
       });
       dispatch(clearErrors());
-      dispatch({type: STOP_LOADING_UI});
+      // dispatch({type: STOP_LOADING_UI});
       
     })
     .catch(err => {
